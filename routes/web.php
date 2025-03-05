@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SalesController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,3 +42,5 @@ Route::get('/sales', [SalesController::class, 'index']);
 Route::get('/level', [LevelController::class, 'index']);
 
 Route ::get('/Kategori', [KategoriController::class, 'index']);
+
+Route::get('/user', [UserController::class, 'index']);
