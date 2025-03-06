@@ -13,22 +13,14 @@ class UserController extends Controller
     
        public function index()
        {
-           // Update data user berdasarkan username
-           $dataUpdate = [
-               'nama' => 'Pelanggan Pertama',
+           $data = [
+            'level_id' => 2,
+            'username' => 'manager_tiga',
+            'nama' => 'manager 3',
+            'password' => hash::make('1234')
            ];
    
-           UserModel::where('username', 'customer-1')->update($dataUpdate);
-   
-           // Tambahkan data baru ke tabel m_user dengan level_id
-           $dataInsert = [
-               'username' => 'pelanggan_baru',
-               'nama' => 'Pelanggan Baru',
-               'password' => Hash::make('password123'), // Buat password terenkripsi
-               'level_id' => 4, // Pastikan level_id ada
-           ];
-   
-           UserModel::insert($dataInsert);
+           UserModel::create($data);
    
            // Ambil semua data dari tabel m_user
            $user = UserModel::all();
