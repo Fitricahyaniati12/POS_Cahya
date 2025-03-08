@@ -10,7 +10,24 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = UserModel::all(); // Mengambil semua data pengguna
+        $user = UserModel::all();
         return view('user', ['data' => $user]);
+    }
+
+    public function tambah()
+    {
+        return view('user_tambah');
+    }
+
+    public function simpan(Request $request)
+    {
+        UserModel::create([
+            'username' => $request->username,
+            'nama' => $request->nama,
+            'password' => bcrypt($request->password),
+            'level_id' => $request->level_id
+        ]);
+
+        return redirect()->route('user')->with('success', 'User berhasil ditambahkan');
     }
 }
