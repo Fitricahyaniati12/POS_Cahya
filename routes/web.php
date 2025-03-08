@@ -44,3 +44,8 @@ Route::get('/level', [LevelController::class, 'index']);
 Route ::get('/Kategori', [KategoriController::class, 'index']);
 
 Route::get('/user', [UserController::class, 'index']);
+
+Route::get('/user/tambah', [UserController::class, 'tambah'])->name('user.tambah');
+Route::get('/user/ubah/{id}', [UserController::class, 'ubah'])->name('user.ubah');
+Route::get('/user/hapus/{id}', [UserController::class, 'hapus'])->name('user.hapus');
+
