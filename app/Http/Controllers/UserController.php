@@ -13,17 +13,15 @@ class UserController extends Controller
     
        public function index()
        {
-           $data = [
-            'level_id' => 2,
-            'username' => 'manager_tiga',
-            'nama' => 'manager 3',
-            'password' => hash::make('1234')
-           ];
-   
-           UserModel::create($data);
-   
-           // Ambil semua data dari tabel m_user
-           $user = UserModel::all();
+            // ambil model pertama yang cocok dengan batasan queri
+           //$user = UserModel::where('level_id',2)->first();
+
+            // alternatif untuk mengambil mode pertama yang cocok dengan batasan queri
+           //$user = UserModel::firstWhere('level_id', 3);
+
+           $user = UserModel::findOr(20, ['username', 'nama'], function () {
+            abort(404);
+        });
            return view('user', ['data' => $user]);
        }
    }
