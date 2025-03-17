@@ -7,8 +7,7 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SalesController;
-
-
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +53,4 @@ Route::get('/user/ubah/{id}', [UserController::class, 'ubah'])->name('user.ubah'
 Route::get('/user/hapus/{id}', [UserController::class, 'hapus'])->name('user.hapus');
 Route::post('/user/tambah_simpan', [UserController::class, 'simpan'])->name('user.tambah_simpan');
 Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubahSimpan'])->name('user.ubah_simpan');
+Route::get('/', [WelcomeController::class, 'index']);
