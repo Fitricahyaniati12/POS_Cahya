@@ -21,9 +21,12 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{{ url('/') }}" class="brand-link">
-                <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img">
+                <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image">
                 <span class="brand-text font-weight-light">PWL - Starter Code</span>
             </a>
+
+            <!-- Sidebar -->
+            @include('layouts.sidebar')
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
@@ -38,6 +41,10 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+
+        <!-- Footer -->
+        @include('layouts.footer')
+
     </div>
 
     <!-- jQuery -->
