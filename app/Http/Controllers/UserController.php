@@ -10,6 +10,7 @@ use App\Models\LevelModel;
 
 class UserController extends Controller
 {
+    //menampilkan  halaman awal user
     public function index()
     {
 
@@ -20,9 +21,10 @@ class UserController extends Controller
         $page = (object) [
             'title' => 'Daftar user yang terdaftar dalam sistem'
         ];
-        $activeMenu = 'user';
+        $activeMenu = 'user'; // set menu yang sedang aktif
 
-        $level = LevelModel::all();
+        $level = LevelModel::all();// ambil data level untuk filter level
+
         return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page,'level' => $level, 'activeMenu' => $activeMenu]);
 
     }
@@ -33,6 +35,7 @@ class UserController extends Controller
         $users = UserModel::select('user_id', 'username', 'nama', 'level_id')
             ->with('level');
         
+            // Filter data user berdasarkan level_id
         if ($request->ajax()) {
             if ($request->level_id) {
                 $users->where('level_id', $request->level_id);
@@ -51,6 +54,7 @@ class UserController extends Controller
             ->rawColumns(['aksi']) // memberitahu bahwa kolom aksi adalah html
             ->make(true);
     }
+    //menampilkan halaman form
     public function create()
     {
         $breadcrumb = (object) [
@@ -64,6 +68,8 @@ class UserController extends Controller
         $activeMenu = 'user';
         return view('user.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
+
+    //menapilkan data user baru
 
     public function store(Request $request)
     {
@@ -83,6 +89,7 @@ class UserController extends Controller
 
         return redirect('/user')->with('success', 'Data user berhasil ditambahkan');
     }
+    //menampilkan detail user
 
     public function show($id)
     {
@@ -97,7 +104,7 @@ class UserController extends Controller
         $activeMenu = 'user';
         return view('user.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'activeMenu' => $activeMenu]);
     }
-
+//menampilkan halaman form edit user
     public function edit(string $id)
     {
         $user = UserModel::find($id);

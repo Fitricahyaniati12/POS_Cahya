@@ -67,7 +67,7 @@
                             }
                         },
                         columns: [{
-                                data: "DT_RowIndex",
+                                data: "DT_RowIndex", // nomor urut dari level datable addindexColum
                                 className: "text-center",
                                 orderable: false,
                                 searchable: false
@@ -93,8 +93,8 @@
                             {
                                 data: "aksi",
                                 className: "className",
-                                orderable: false,
-                                searchable: false
+                                orderable: false, // oderable : true, jika ingin kolom ini bisa diurutkan
+                                searchable: false // searchhable: true, jika ingin kolom ini bisa di cari
                             }
                         ]
                     });
