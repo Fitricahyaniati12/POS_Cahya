@@ -49,32 +49,27 @@ class BarangController extends Controller
     }
 
     public function store_ajax(Request $request)
-    {
-        $request->validate([
+{
+    if ($request->ajax() || $request->wantsJson()) {
+        $rules = [
             'kategori_id' => 'required|integer',
             'barang_kode' => 'required|string|min:3|unique:m_barang,barang_kode',
             'barang_nama' => 'required|string|min:3|unique:m_barang,barang_nama',
             'harga_beli' => 'required|integer',
             'harga_jual' => 'required|integer'
-        ]);
+        ];
 
-        if ($request->ajax() || $request->wantsJson()) {
-            $rules = [
-                'kategori_id' => 'required|integer',
-                'barang_kode' => 'required|string|min:3|unique:m_barang,barang_kode',
-                'barang_nama' => 'required|string|min:3|unique:m_barang,barang_nama',
-                'harga_beli' => 'required|integer',
-                'harga_jual' => 'required|integer'
-            ];
-            $validator = Validator::make($request->all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
 
-            if ($validator->fails()) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Validasi Gagal',
-                    'msgField' => $validator->errors()
-                ]);
-            }
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Validasi Gagal',
+                'msgField' => $validator->errors()
+            ]);
+        }
+
+        try {
             BarangModel::create([
                 'kategori_id' => $request->kategori_id,
                 'barang_kode' => $request->barang_kode,
@@ -82,13 +77,26 @@ class BarangController extends Controller
                 'harga_beli' => $request->harga_beli,
                 'harga_jual' => $request->harga_jual
             ]);
+
             return response()->json([
                 'status' => true,
                 'message' => 'Data barang berhasil disimpan'
             ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Terjadi kesalahan saat menyimpan data',
+                'error' => $e->getMessage()
+            ]);
         }
-        redirect('/');
     }
+
+    return response()->json([
+        'status' => false,
+        'message' => 'Invalid request'
+    ]);
+}
+
     // Menyimpan data barang baru
     public function store(Request $request)
     {
