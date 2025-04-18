@@ -19,13 +19,7 @@
                     <textarea name="deskripsi" id="deskripsi" class="form-control" rows="3" required></textarea>
                     <small id="error-deskripsi" class="error-text form-text text-danger"></small>
                 </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" name="password" id="password" class="form-control">
-                    <small class="form-text text-muted">Abaikan jika tidak ingin ubah password</small>
-                    <small id="error-password" class="error-text form-text text-danger"></small>
-                </div>
-            </div>
+            
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>
