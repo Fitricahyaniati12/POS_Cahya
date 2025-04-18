@@ -54,6 +54,8 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
+
             </div>
         </div>
     </div>

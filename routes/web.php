@@ -147,6 +147,8 @@ Route::group(['prefix' => 'stok'], function () {
     Route::get('/{id}/delete_ajax', [StokController::class, 'confirm_ajax']);
     Route::delete('/{id}/delete_ajax', [StokController::class, 'delete_ajax']);
     Route::delete('/{id}', [StokController::class, 'destroy']);
+    Route::post('/ajax', [BarangController::class, 'store_ajax']);
+
 });
 
 Route::prefix('penjualan')->group(function () {
