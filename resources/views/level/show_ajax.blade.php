@@ -1,6 +1,5 @@
 @empty($level)
-<div id="modal-master" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
+    <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Kesalahan</h5>
@@ -11,41 +10,43 @@
             <div class="modal-body">
                 <div class="alert alert-danger">
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
-                    Data level yang anda cari tidak ditemukan
+                    Data yang anda cari tidak ditemukan
                 </div>
                 <a href="{{ url('/level') }}" class="btn btn-warning">Kembali</a>
             </div>
         </div>
     </div>
-</div>
 @else
-<form action="#" id="form-show">
-    <div id="modal-master" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Detail Data Level</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <div id="modal-master" class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detail Data Level</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="alert alert-info">
+                    <h5><i class="icon fas fa-info-circle"></i> Informasi</h5>
+                    Berikut adalah detail data level yang dipilih.
                 </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Kode Level</label>
-                        <input value="{{ $level->level_kode }}" type="text" name="level_kode" id="level_kode" class="form-control" disabled>
-                        <small id="error-level_kode" class="error-text form-text text-danger"></small>
-                    </div>
-                    <div class="form-group">
-                        <label>Nama Level</label>
-                        <input value="{{ $level->level_nama }}" type="text" name="level_nama" id="level_nama" class="form-control" disabled>
-                        <small id="error-level_nama" class="error-text form-text text-danger"></small>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-primary">Kembali</button>
-                </div>
+
+                <table class="table table-sm table-bordered table-striped">
+                    <tr>
+                        <th class="text-right col-3">Kode Level:</th>
+                        <td class="col-9">{{ $level->level_kode }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right col-3">Nama Level:</th>
+                        <td class="col-9">{{ $level->level_nama }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             </div>
         </div>
     </div>
-</form>
 @endempty

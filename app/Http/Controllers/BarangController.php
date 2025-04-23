@@ -121,6 +121,10 @@ class BarangController extends Controller
     {
         $barangs = BarangModel::select('barang_id', 'kategori_id', 'barang_nama', 'barang_kode', 'harga_beli', 'harga_jual')->with('kategori');
 
+          // Cek apakah ada filter kategori
+    if ($request->has('kategori_id') && $request->kategori_id != '') {
+        $barangs->where('kategori_id', $request->kategori_id);
+    }
         return DataTables::of($barangs)
             // menambahkan kolom index / no urut (default nama kolom: DT_RowIndex) 
             ->addIndexColumn()
@@ -200,7 +204,7 @@ class BarangController extends Controller
     public function edit_ajax(string $id)
     {
         $barang = BarangModel::find($id);
-        $kategori = KategoriModel::select('kategori_id', 'kategori_nama')->get();
+        $kategori = KategoriModel::select('kategori_id', 'nama_kategori')->get();
         return view('barang.edit_ajax', ['barang' => $barang, 'kategori' => $kategori]);
     }
 
