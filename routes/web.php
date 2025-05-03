@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PenjualanDetailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BarangController;
@@ -9,7 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\WelcomeController;
-
+use App\Models\PenjualanDetailModel;
 
 /*
 |--------------------------------------------------------------------------
@@ -170,4 +171,23 @@ Route::group(['prefix' => 'penjualan'], function () {
     Route::get('/{id}/show_ajax', [PenjualanController::class, 'show_ajax']);
     Route::delete('/{id}', [PenjualanController::class, 'destroy']);
 });
+
+Route::group(['prefix' => 'penjualan_detail'], function () {
+    Route::get('/', [PenjualanDetailController::class, 'index']);
+    Route::post('/list', [PenjualanDetailController::class, 'list']);
+    Route::get('/create', [PenjualanDetailController::class, 'create']);
+    Route::post('/', [PenjualanDetailController::class, 'store']);
+    Route::get('/create_ajax', [PenjualanDetailController::class, 'create_ajax']);
+    Route::post('/ajax', [PenjualanDetailController::class, 'store_ajax']);
+    Route::get('/{id}/show_ajax', [PenjualanDetailController::class, 'show_ajax']);
+    Route::get('/{id}', [PenjualanDetailController::class, 'show']);
+    Route::get('/{id}/edit', [PenjualanDetailController::class, 'edit']);
+    Route::put('/{id}', [PenjualanDetailController::class, 'update']);
+    Route::get('/{id}/edit_ajax', [PenjualanDetailController::class, 'edit_ajax']);
+    Route::put('/{id}/update_ajax', [PenjualanDetailController::class, 'update_ajax']);
+    Route::get('/{id}/delete_ajax', [PenjualanDetailController::class, 'confirm_ajax']);
+    Route::delete('/{id}/delete_ajax', [PenjualanDetailController::class, 'delete_ajax']);
+    Route::delete('/{id}', [PenjualanDetailController::class, 'destroy']);
+});
+
 
