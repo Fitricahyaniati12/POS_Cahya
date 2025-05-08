@@ -7,21 +7,21 @@
         <div class="card-tools"></div>
     </div>
     <div class="card-body">
-    @empty($penjualanDetail)
+    @empty($penjualan_detail)
         <div class="alert alert-danger alert-dismissible">
             <h5><i class="icon fas fa-ban"></i> Kesalahan!</h5>
             Data yang Anda cari tidak ditemukan.
         </div>
         <a href="{{ url('penjualan_detail') }}" class="btn btn-sm btn-default mt-2">Kembali</a>
     @else
-        <form method="POST" action="{{ url('/penjualan_detail/'.$penjualanDetail->detail_id) }}" class="form-horizontal">
+        <form method="POST" action="{{ url('/penjualan_detail/'.$penjualan_detail->detail_id) }}" class="form-horizontal">
         @csrf
         {!! method_field('PUT') !!}
         <div class="form-group row">
             <label class="col-1 control-label col-form-label">Penjualan ID</label>
             <div class="col-11">
                 <input type="text" class="form-control" id="penjualan_id" name="penjualan_id"
-                    value="{{ old('penjualan_id', $penjualanDetail->penjualan_id) }}" required>
+                    value="{{ old('penjualan_id', $penjualan_detail->penjualan_id) }}" required>
                 @error('penjualan_id')
                     <small class="form-text text-danger">{{ $message }}</small>
                 @enderror
@@ -31,7 +31,7 @@
             <label class="col-1 control-label col-form-label">Barang ID</label>
             <div class="col-11">
                 <input type="text" class="form-control" id="barang_id" name="barang_id"
-                    value="{{ old('barang_id', $penjualanDetail->barang_id) }}" required>
+                    value="{{ old('barang_id', $penjualan_detail->barang_id) }}" required>
                 @error('barang_id')
                     <small class="form-text text-danger">{{ $message }}</small>
                 @enderror
@@ -41,7 +41,7 @@
             <label class="col-1 control-label col-form-label">Harga</label>
             <div class="col-11">
                 <input type="number" class="form-control" id="harga" name="harga"
-                    value="{{ old('harga', $penjualanDetail->harga) }}" required>
+                    value="{{ old('harga', $penjualan_detail->harga) }}" required>
                 @error('harga')
                     <small class="form-text text-danger">{{ $message }}</small>
                 @enderror
@@ -51,7 +51,7 @@
             <label class="col-1 control-label col-form-label">Jumlah</label>
             <div class="col-11">
                 <input type="number" class="form-control" id="jumlah" name="jumlah"
-                    value="{{ old('jumlah', $penjualanDetail->jumlah) }}" required>
+                    value="{{ old('jumlah', $penjualan_detail->jumlah) }}" required>
                 @error('jumlah')
                     <small class="form-text text-danger">{{ $message }}</small>
                 @enderror

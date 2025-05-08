@@ -28,16 +28,16 @@
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    {{--  <div class="form-group">
+                      <div class="form-group">
                         <label>Penjualan ID</label>
-                        <input value="{{ $penjualanDetail->penjualan_id }}" type="text" name="penjualan_id" id="penjualan_id" class="form-control" required>
+                        <input value="{{ $penjualan_detail->penjualan_id }}" type="text" name="penjualan_id" id="penjualan_id" class="form-control" required>
                         <small id="error-penjualan_id" class="error-text form-text text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label>Barang ID</label>
-                        <input value="{{ $penjualanDetail->barang_id }}" type="text" name="barang_id" id="barang_id" class="form-control" required>
+                        <input value="{{ $penjualan_detail->barang_id }}" type="text" name="barang_id" id="barang_id" class="form-control" required>
                         <small id="error-barang_id" class="error-text form-text text-danger"></small>
-                    </div>  --}}
+                    </div>  
                     <div class="form-group">
                         <label>Penjualan</label>
                         <select name="penjualan_id" id="penjualan_id" class="form-control" required>
@@ -117,7 +117,7 @@
                                     title: 'Berhasil',
                                     text: response.message
                                 });
-                                dataDetailPenjualan.ajax.reload();
+                                datapenjualandetail.ajax.reload();
                             } else {
                                 $('.error-text').text('');
                                 $.each(response.msgField, function(prefix, val) {

@@ -7,7 +7,7 @@
             <div class="card-tools"></div>
         </div>
         <div class="card-body">
-            @empty($penjualanDetail)
+            @empty($penjualan_detail)
                 <div class="alert alert-danger alert-dismissible">
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!</h5>
                     Data yang Anda cari tidak ditemukan.
@@ -16,23 +16,23 @@
                 <table class="table table-bordered table-striped table-hover table-sm">
                     <tr>
                         <th>ID</th>
-                        <td>{{ $penjualanDetail->detail_id }}</td>
+                        <td>{{ $penjualan_detail->detail_id }}</td>
                     </tr>
                     <tr>
                         <th>Penjualan ID</th>
-                        <td>{{ $penjualanDetail->penjualan_id }}</td>
+                        <td>{{ $penjualan_detail->penjualan_id }}</td>
                     </tr>
                     <tr>
                         <th>Barang ID</th>
-                        <td>{{ $penjualanDetail->barang_id }}</td>
+                        <td>{{ $penjualan_detail->barang_id }}</td>
                     </tr>
                     <tr>
                         <th>Harga</th>
-                        <td>{{ $penjualanDetail->harga }}</td>
+                        <td>{{ $penjualan_detail->harga }}</td>
                     </tr>
                     <tr>
                         <th>Jumlah</th>
-                        <td>{{ $penjualanDetail->jumlah }}</td>
+                        <td>{{ $penjualan_detail->jumlah }}</td>
                     </tr>
                 </table>
             @endempty
