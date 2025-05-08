@@ -11,7 +11,8 @@ use App\Http\Controllers\StokController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\PenjualanDetailModel;
-
+use App\Http\Controllers\AuthController;
+Route:: get ('/', [WelcomeController :: class,'index' ]);
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,7 +23,13 @@ use App\Models\PenjualanDetailModel;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::pattern('id','[0-9]+');
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'postlogin']);
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::middleware(['auth'])->group(function () {
+    
 /*Route::get('/', function () {
     return view('welcome');
 });
@@ -50,14 +57,14 @@ Route::get('/user', [UserController::class, 'index']);
 //Route::get('/user/tambah', [UserController::class, 'tambah'])->name('user.tambah');
 */
 
-Route::get('/user', [UserController::class, 'index'])->name('user');
+/*Route::get('/user', [UserController::class, 'index'])->name('user');
 Route::get('/user/tambah', [UserController::class, 'tambah'])->name('user.tambah');
 Route::get('/user/ubah/{id}', [UserController::class, 'ubah'])->name('user.ubah');
 Route::get('/user/hapus/{id}', [UserController::class, 'hapus'])->name('user.hapus');
 Route::post('/user/tambah_simpan', [UserController::class, 'simpan'])->name('user.tambah_simpan');
 Route::put('/user/ubah_simpan/{id}', [UserController::class, 'ubahSimpan'])->name('user.ubah_simpan');
 Route::get('/', [WelcomeController::class, 'index']);
-
+*/
 Route::group(['prefix' => 'user'], function () {
     Route::get('/', [UserController::class, 'index']);
     Route::post('/list', [UserController::class, 'list']);
@@ -191,3 +198,4 @@ Route::group(['prefix' => 'penjualan_detail'], function () {
 });
 
 
+});

@@ -89,6 +89,14 @@
                     <p>Sales Transaction Details</p>
                 </a>
             </li>
+            <li class="nav-header">Logout</li>
+             <li class="nav-item">
+                <a href="{{ url('/logout') }}" class="nav-link {{ $activeMenu == 'logout' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-sign-out-alt text-danger"></i>
+                    <p class="text-danger">Logout</p>
+                </a>
+            </li>
+
         </ul>
     </nav>
 </div>
