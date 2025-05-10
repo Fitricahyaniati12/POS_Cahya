@@ -12,7 +12,7 @@ use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\WelcomeController;
 use App\Models\PenjualanDetailModel;
 use App\Http\Controllers\AuthController;
-Route:: get ('/', [WelcomeController :: class,'index' ]);
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,6 +29,25 @@ Route::post('login', [AuthController::class, 'postlogin']);
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
+Route:: get ('/', [WelcomeController :: class,'index' ]);
+Route::middleware(['authorize:ADM'])->group(function () {
+   Route::group(['prefix' => 'level'], function () {
+        Route::get('/', [LevelController::class, 'index']);
+        Route::post('/list', [LevelController::class, 'list']);
+        Route::get('/create', [LevelController::class, 'create']);
+        Route::post('/', [LevelController::class, 'store']);
+        Route::get('/create_ajax', [LevelController::class, 'create_ajax']);
+        Route::post('/store_ajax', [LevelController::class, 'store_ajax']);
+        Route::get('/{id}', [LevelController::class, 'show']);
+        Route::get('/{id}/edit', [LevelController::class, 'edit']);
+        Route::put('/{id}', [LevelController::class, 'update']);
+        Route::get('/{id}/show_ajax', [LevelController::class, 'show_ajax']);
+        Route::get('/{id}/edit_ajax', [LevelController::class, 'edit_ajax']);
+        Route::put('/{id}/update_ajax', [LevelController::class, 'update_ajax']);
+        Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']);
+        Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']);
+        Route::delete('/{id}', [LevelController::class, 'destroy']);
+    });
     
 /*Route::get('/', function () {
     return view('welcome');
@@ -84,7 +103,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::delete('/{id}', [UserController::class, 'destroy']);
 });
 
-Route::group(['prefix' => 'level'], function () {
+/*Route::group(['prefix' => 'level'], function () {
     Route::get('/', [LevelController::class, 'index']);
     Route::post('/list', [LevelController::class, 'list']);
     Route::get('/create', [LevelController::class, 'create']);
@@ -100,7 +119,7 @@ Route::group(['prefix' => 'level'], function () {
     Route::get('/{id}/delete_ajax', [LevelController::class, 'confirm_ajax']);
     Route::delete('/{id}/delete_ajax', [LevelController::class, 'delete_ajax']);
     Route::delete('/{id}', [LevelController::class, 'destroy']);
-});
+});*/
 
 
 Route::group(['prefix' => 'kategori'], function () {
@@ -196,6 +215,5 @@ Route::group(['prefix' => 'penjualan_detail'], function () {
     Route::delete('/{id}/delete_ajax', [PenjualanDetailController::class, 'delete_ajax']);
     Route::delete('/{id}', [PenjualanDetailController::class, 'destroy']);
 });
-
-
+});
 });
