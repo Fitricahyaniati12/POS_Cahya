@@ -6,27 +6,21 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthorizeUser
+class AuthorizeUser {
+    public function handle(Request $request, Closure $next, ...$roles): Response
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
-     * @param  string  $role
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function handle(Request $request, Closure $next, $role = ''): Response
-    {
-        // Ambil user yang sedang login
-        $user = $request->user();
+    // Flatten roles jika ada yang menggunakan koma
+    $allowedRoles = collect($roles)
+        ->flatMap(fn($role) => explode(',', $role))
+        ->map(fn($role) => strtoupper(trim($role)))
+        ->toArray();
 
-        // Cek apakah user memiliki role yang diizinkan
-        if ($user && $user->hasRole($role)) {
-            return $next($request);
-        }
+    $user = $request->user();
 
-        // Jika tidak punya role, tampilkan error 403
-        abort(403, 'Forbidden. Kamu tidak punya akses ke halaman ini.');
+    if (!$user || !in_array(strtoupper($user->getRole()), $allowedRoles)) {
+        abort(403, 'Forbidden. Kamu tidak mempunyai akses ke halaman ini');
+    }
+
+    return $next($request);
     }
 }
