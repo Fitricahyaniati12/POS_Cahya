@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class UserModel extends  Authenticatable
 {
@@ -16,7 +17,7 @@ class UserModel extends  Authenticatable
     protected $primaryKey = 'user_id'; // Mendefinisikan primary key dari tabel yang digunakan
 
     protected $fillable = ['level_id', 'username', 'nama', 'password', 'created_at', 'updated_at', 'image'];
-    
+
     protected $hidden   = ['password'];
 
     protected $casts    = ['password' => 'hashed'];
@@ -30,8 +31,8 @@ class UserModel extends  Authenticatable
      */
     public function getRoleName(): string
     {
-       return $this->level ? $this->level->level_nama : 'Tidak ada level';
-       //return $this->level->level_nama;
+        return $this->level ? $this->level->level_nama : 'Tidak ada level';
+        //return $this->level->level_nama;
     }
 
     /**
@@ -45,13 +46,16 @@ class UserModel extends  Authenticatable
     {
         return $this->level ? $this->level->level_kode : null;
     }
-// public function getProfilePictureUrl()
-// {
-//     return $this->image
-//         ? asset($this->image)
-//         : asset('adminlte/dist/img/user2-160x160.jpg');
-// }
-
-    
-    
+    // protected function image(): Attribute
+    // {
+    //     return Attribute::make(
+    //         get: fn ($image) => url($image)
+    //     );
+    // }
+    public function getProfilePictureUrl()
+    {
+        return $this->image
+            ? asset($this->image) // karena langsung di public/
+            : asset('adminlte/dist/img/user2-160x160.jpg');
+    }
 }
