@@ -433,7 +433,7 @@ class BarangController extends Controller
         }
 
         $sheet->setTitle('Data Barang');
-        $writer = IOFactory::createWriter($spreadsheet, 'xlsx');
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
         $filename = 'Data Barang ' . date('Y-m-d H-i-s') . '.xlsx';
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
