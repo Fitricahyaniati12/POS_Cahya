@@ -8,9 +8,20 @@ use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class UserModel extends  Authenticatable
+class UserModel extends  Authenticatable implements JWTSubject
 {
+
+    public function getJWTIdentifier()
+    {
+        return $this->getkey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return[];
+    }
     use HasFactory;
 
     protected $table = 'm_user'; // Mendefinisikan nama tabel yang digunakan oleh model ini
