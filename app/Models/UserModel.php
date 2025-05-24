@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Traits\Timestamp;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Middleware\Authorize;
@@ -22,12 +23,12 @@ class UserModel extends  Authenticatable implements JWTSubject
     {
         return[];
     }
-    use HasFactory;
+    use HasFactory, Timestamp;
 
     protected $table = 'm_user'; // Mendefinisikan nama tabel yang digunakan oleh model ini
     protected $primaryKey = 'user_id'; // Mendefinisikan primary key dari tabel yang digunakan
 
-    protected $fillable = ['level_id', 'username', 'nama', 'password', 'created_at', 'updated_at', 'image'];
+     protected $fillable = ['level_id', 'username', 'nama', 'password', 'created_at', 'updated_at', 'image'];
 
     protected $hidden   = ['password'];
 
