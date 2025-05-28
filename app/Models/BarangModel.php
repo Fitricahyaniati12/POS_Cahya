@@ -18,8 +18,11 @@ class BarangModel extends Model
         'barang_nama',
         'harga_beli',
         'harga_jual',
+        'image' 
     ];
-    
+    protected $casts = [
+    'image' => 'string',
+];
     public function kategori()
     {
         return $this->hasOne(BarangModel::class, 'barang_id', 'barang_id');

@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\LevelController;
 use App\Http\Controllers\Api\BarangController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\UserController;
+use FontLib\Table\Type\name;
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/user', function (Request $request) {
@@ -46,3 +47,4 @@ Route::delete('/barang/{barang}', [BarangController::class, 'destroy']);
 
 
 Route::post('/barang/image', [BarangController::class, 'add_image'])->name('image');
+Route::post('/register', RegisterController::class)->name('register');
