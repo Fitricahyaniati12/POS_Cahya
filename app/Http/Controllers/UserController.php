@@ -298,51 +298,51 @@ public function edit_ajax(string $id)
 }
 
 public function profile()
-{
-    $user = auth()->user();
-    $breadcrumb = (object) [
-        'title' => 'Profile',
-        'list' => ['Home', 'Profile']
-    ];
+    {
+        $user = auth()->user();
+        $breadcrumb = (object) [
+            'title' => 'Profile',
+            'list' => ['Home', 'Profile']
+        ];
 
-    $page = (object) [
-        'title' => 'User Profile'
-    ];
+        $page = (object) [
+            'title' => 'User Profile'
+        ];
 
-    $activeMenu = 'profile';
-    return view('profile', compact('breadcrumb', 'page', 'user', 'activeMenu'));
-}
-
-public function updateProfilePicture(Request $request)
-{
-    $request->validate([
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
-
-    $authUser = auth()->user();
-    $user = UserModel::find($authUser->user_id);
-
-    if ($user->image && file_exists(public_path($user->image))) {
-        unlink(public_path($user->image));
+        $activeMenu = 'profile';
+        return view('profile', compact('breadcrumb', 'page', 'user', 'activeMenu'));
     }
 
-    $file = $request->file('image');
-    $fileName = time() . '_' . $file->getClientOriginalName();
-    $filePath = 'uploads/profile/';
+     public function updateProfilePicture(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    if (!file_exists(public_path($filePath))) {
-        mkdir(public_path($filePath), 0777, true);
+        $authUser = auth()->user();
+        $user = UserModel::find($authUser->user_id);
+
+        if ($user->image && file_exists(public_path($user->image))) {
+            unlink(public_path($user->image));
+        }
+
+        $file = $request->file('image');
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        $filePath = 'uploads/profile/';
+
+        if (!file_exists(public_path($filePath))) {
+            mkdir(public_path($filePath), 0777, true);
+        }
+
+        $file->move(public_path($filePath), $fileName);
+
+        $user->image = $filePath . $fileName;
+        $user->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Profile picture updated successfully',
+            'image_url' => $user->getProfilePictureUrl()
+        ]);
     }
-
-    $file->move(public_path($filePath), $fileName);
-
-    $user->image = $filePath . $fileName;
-    $user->save();
-
-    return response()->json([
-        'status' => true,
-        'message' => 'Profile picture updated successfully',
-        'image_url' => $user->getProfilePictureUrl()
-    ]);
-}
 }

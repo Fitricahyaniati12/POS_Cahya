@@ -61,15 +61,20 @@ class UserModel extends  Authenticatable implements JWTSubject
 
     protected function image(): Attribute
     {
-    return Attribute::make(
-    get: fn ($image) => url('/storage/posts/' . $image),
+         return Attribute::make(
+        get: fn ($image) => $image ? url('/' . $image) : null,
     );
+    // return Attribute::make(
+    // get: fn ($image) => url('/storage/posts/' . $image),
+    // );
     }
 
     public function getProfilePictureUrl()
     {
         return $this->image
             ? asset($this->image) // karena langsung di public/
-            : asset('adminlte/dist/img/user2-160x160.jpg');
+            : asset('adminlte/dist/img/avatar.png');
+
+            //: asset('adminlte/dist/img/user2-160x160');
     }
 }
